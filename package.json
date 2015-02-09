@@ -1,0 +1,17 @@
+{
+    "name" : "my-app",
+        "description" : "my new node app",
+        "author" : "greg tracy",
+        "version" : "0.0.1",
+        "dependencies": {
+            "express" : "2.5.9",
+            "jade" : "0.19.0",
+            "underscore" : "1.3.3",
+            "logme" : "0.3.8",
+            "cron"  : "*",
+            "request" : "*",
+            "performance-now" : "*",
+            "fast-csv" : "*",
+            "moment" : "*"
+        }
+}
