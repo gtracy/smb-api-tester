@@ -44,8 +44,9 @@ var apiCall = function(base_url) {
             var call_time = ((end-start)/1000).toFixed(0);
             logme.info('API speed ('+stop+') : ' + call_time);
 
+            var results;
             try {
-                var results = JSON.parse(body);
+                results = JSON.parse(body);
             } catch( ex ) {
                 logme.error('Parse ERROR');
                 logme.error(body);
@@ -59,7 +60,7 @@ var apiCall = function(base_url) {
             }
             var stop_detail_id;
             var route_length = 0;
-            if( results.stop ) {
+            if( results && results.stop ) {
                 stop_detail_id = results.stop.stopID;
                 route_length = results.stop.route.length;
             }
