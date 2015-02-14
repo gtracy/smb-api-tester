@@ -16,22 +16,26 @@ var stops = [
     '0161',
     '0435',
     '0962',
+    '1256',
+    '1309',
+    '1505',
     '2447',
     '2969',
     '2899'
 ];
 var host = "http://load-testing.msn-transit-api.appspot.com/";
-var key = "fixme";
+var key = process.env.KEY;
 
 // response.statusCode
 
-var apiCall = function() {
+var apiCall = function(base_url) {
     var url;
-    writableStream = fs.createWriteStream("requests.csv");
+    host = base_url;
+    writableStream = fs.createWriteStream("requests-prod.csv");
     csvStream.pipe(writableStream);
 
     stops.forEach(function(stop) {
-        logme.info('API request for stop ' + stop);
+        logme.info('API request for stop ' + stop + ' at ' + url);
         url = host + '/v1/getarrivals?key=' + key + '&stopID=' + stop;
         var start = now();
         var wall_clock_start = moment().format();
@@ -74,7 +78,7 @@ var apiCall = function() {
     });
 };
 
-module.exports.register = function(channel) {
+module.exports.register = function(base_url) {
     // 8:00am every Wednesday.
-    new cronJob('* * * * *', apiCall, null, true, "America/Chicago");
+    new cronJob('* * * * *', apiCall, [base_url], true, "America/Chicago");
 };

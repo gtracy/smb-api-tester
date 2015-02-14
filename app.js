@@ -28,7 +28,7 @@ app.configure(function() {
 
     // CRON
     var cron = require('./cron/smb_request');
-    cron.register();
+    cron.register("http://load-testing.msn-transit-api.appspot.com/");
 
 });
 
