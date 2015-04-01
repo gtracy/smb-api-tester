@@ -28,11 +28,12 @@ app.configure(function() {
 
     // CRON
     var cron = require('./cron/smb_request');
-    cron.register("http://load-testing.msn-transit-api.appspot.com/");
+    //cron.register('http://threadsafe.msn-transit-api.appspot.com/');
+    cron.register('http://api.smsmybus.com/');
 
 });
 
 // start the web application server
 var port = process.env.PORT || 8088;
 app.listen(port);
-logme.info('Asthmapolis server started on port ' + port);
+logme.info('server started on port ' + port);
