@@ -23,7 +23,7 @@ var stops = [
     '2969',
     '2899'
 ];
-var host = "http://load-testing.msn-transit-api.appspot.com/";
+var host = "http://api.smsmybus.com/";
 var key = process.env.KEY;
 
 // response.statusCode
@@ -51,9 +51,8 @@ var apiCall = function(base_url) {
                 logme.error('Parse ERROR');
                 logme.error(body);
             }
-            if (!error && response.statusCode == 200) {
+            if (!error && response.statusCode == 200 && results.status >= 0 ) {
                 logme.info('API Success!');
-                //console.dir(results);
             } else {
                 logme.error('API Fail : ' + error);
                 console.dir(results);
