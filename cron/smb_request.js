@@ -13,14 +13,14 @@ var stops = [
     '1101',
     '0455',
     '0100',
-    '0161',
+    '1650',
     '0435',
     '0962',
-    '1256',
+    '1959',
     '1309',
     '1505',
     '2447',
-    '2969',
+    '1878',
     '2899'
 ];
 var host = "http://api.smsmybus.com/";
@@ -40,6 +40,10 @@ var apiCall = function(base_url) {
         var start = now();
         var wall_clock_start = moment().format();
         request(url, function (error, response, body) {
+            if( !response ) {
+                logme.error('Connect error. Bail');
+                return;
+            }
             var end = now();
             var call_time = ((end-start)/1000).toFixed(0);
             logme.info('API speed ('+stop+') : ' + call_time);
@@ -47,6 +51,10 @@ var apiCall = function(base_url) {
             var results;
             try {
                 results = JSON.parse(body);
+                if( !results ) {
+                    logme.info('... no results for ' + stop);
+                    return;
+                }
             } catch( ex ) {
                 logme.error('Parse ERROR');
                 logme.error(body);
@@ -74,6 +82,7 @@ var apiCall = function(base_url) {
                 'api stop' : stop_detail_id,
                 'route count' : route_length
             });
+            return;
         });
     });
 };
